@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thehyundai.thepet.kafka.AopMapper">
+
+
+    <insert id="saveAOPServiceTable" parameterType="AopServiceVO">
+        INSERT INTO SERVICE_LOGS (CREATED_AT, REQUEST_NAME, METHOD_NAME,EXECUTION_TIME)
+        VALUES (SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul', #{requestName}, #{methodName},#{executionTime})
+    </insert>
+
+
+    <insert id="saveAOPControllerTable" parameterType="AopServiceVO">
+        INSERT INTO CONTROLLER_LOGS (CREATED_AT, REQUEST_MAPPING, METHOD_NAME,PARAMETER_NAME, EXECUTION_TIME)
+        VALUES (SYSTIMESTAMP AT TIME ZONE 'Asia/Seoul', #{requestMapping}, #{methodName},#{parameterName},#{executionTime})
+    </insert>
+
+</mapper>
