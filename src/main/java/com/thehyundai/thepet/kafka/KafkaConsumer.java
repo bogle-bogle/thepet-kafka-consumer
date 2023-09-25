@@ -13,16 +13,17 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumer {
     private final AopMapper aopMapper;
 
-    @KafkaListener(topics = "service_execution_time_log", groupId = "foo")
+    @KafkaListener(topics = "service_execution_time_log", groupId = "foo", containerFactory = "serviceLogKafkaListenerContainerFactory")
     public void consume(AopServiceVO vo){
         log.info(vo.toString());
         aopMapper.saveAOPServiceTable(vo);
     }
 
-    @KafkaListener(topics = "controller_execution_time_log", groupId = "foo")
+    @KafkaListener(topics = "controller_execution_time_log", groupId = "foo", containerFactory = "controllerLogKafkaListenerContainerFactory")
     public void consume(AopControllerVO vo){
         log.info(vo.toString());
         aopMapper.saveAOPControllerTable(vo);
     }
+
 
 }
